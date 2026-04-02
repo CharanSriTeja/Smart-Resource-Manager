@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Classroom Resource Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-info">
+      <h1>Smart Classroom Resource Manager</h1>
+      <p>Browse notes, PPTs, assignments, and files by subject.</p>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost" id="loginToggleBtn">Teacher Login</button>
+      <button class="btn btn-primary hidden" id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- Auth Section -->
+    <section id="authSection" class="card hidden">
+      <h2>Teacher Login</h2>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Teacher email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button class="btn btn-primary" type="submit">Login</button>
+      </form>
+      <p id="authMessage"></p>
+    </section>
+
+    <!-- Upload Section — visible only when logged in -->
+    <section id="uploadSection" class="card hidden">
+      <h2>Upload Resource</h2>
+      <form id="uploadForm">
+        <input type="text" id="title" placeholder="Resource title" required />
+
+        <!-- FIX: unique id="uploadSubject" — was duplicated with filter below -->
+        <select id="uploadSubject">
+          <option value="">Select Subject</option>
+          <option value="DBMS">DBMS</option>
+          <option value="OS">OS</option>
+          <option value="CN">CN</option>
+          <option value="Java">Java</option>
+        </select>
+
+        <!-- FIX: moved customSubject here (inside upload form where it belongs) -->
+        <input
+          type="text"
+          id="customSubject"
+          placeholder="Or type a new subject name"
+        />
+
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option value="PDF">PDF</option>
+          <option value="DOCX">DOCX</option>
+          <option value="PPTX">PPTX</option>
+          <option value="JPG">JPG</option>
+          <option value="PNG">PNG</option>
+          <option value="TXT">TXT</option>
+          <option value="Notes">Notes</option>
+          <option value="Assignment">Assignment</option>
+        </select>
+
+        <input
+          type="file"
+          id="fileInput"
+          accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.txt"
+          required
+        />
+
+        <progress id="progressBar" value="0" max="100"></progress>
+        <button class="btn btn-primary" type="submit">Upload Resource</button>
+      </form>
+      <p id="uploadMessage"></p>
+    </section>
+
+    <!-- Filters — always visible -->
+    <section class="filters card">
+      <input type="text" id="searchInput" placeholder="Search resources..." />
+
+      <!-- FIX: unique id="filterSubject" — was duplicated with upload form above -->
+      <select id="filterSubject">
+        <option value="All">All Subjects</option>
+        <option value="DBMS">DBMS</option>
+        <option value="OS">OS</option>
+        <option value="CN">CN</option>
+        <option value="Java">Java</option>
+        <option value="ADSAA">ADSAA</option>
+      </select>
+
+      <select id="filterCategory">
+        <option value="All">All Types</option>
+        <option value="PDF">PDF</option>
+        <option value="DOCX">DOCX</option>
+        <option value="PPTX">PPTX</option>
+        <option value="JPG">JPG</option>
+        <option value="PNG">PNG</option>
+        <option value="TXT">TXT</option>
+        <option value="Notes">Notes</option>
+        <option value="Assignment">Assignment</option>
+      </select>
+    </section>
+
+    <!-- Resource Grid -->
+    <section>
+      <div id="resourceGrid" class="resource-grid"></div>
+    </section>
+
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
